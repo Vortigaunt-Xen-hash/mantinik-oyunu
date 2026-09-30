@@ -54,8 +54,12 @@ const soruListesi = [
 let aktifSoruIndex = 0; // Hangi soruda olduğumuzu takip etmek için
 
 // EKRAN GEÇİŞİNİ SAĞLAYAN FONKSİYON (GÜNCELLENDİ)
+// EKRAN GEÇİŞİNİ SAĞLAYAN FONKSİYON (GÜNCELLENDİ)
 function testGecis() {
-    // 1. Önce isim girme ekranını görünür yap (gizli kalmasını önler)
+    // Tıklandığı an adres çubuklarını gizle ve tam ekran yap!
+    tamEkranYap(); 
+
+    // 1. Önce isim girme ekranını görünür yap 
     document.getElementById('selection-screen').style.display = 'flex';
     
     // 2. Flamanın yukarı kalkma animasyonunu tetikle
@@ -278,4 +282,16 @@ function hubEkraninaDon() {
 
     // 6. Çekiç animasyonlarını temizle ki yeni oyunda dik dursun
     document.getElementById('hammer').classList.remove('vur-sol-animasyon', 'vur-sag-animasyon');
+}
+
+// --- EKRANI TAM EKRAN YAPAN SİHİRLİ KOD ---
+function tamEkranYap() {
+    let ekran = document.documentElement;
+    if (ekran.requestFullscreen) {
+        ekran.requestFullscreen();
+    } else if (ekran.webkitRequestFullscreen) { /* iPhone / Safari için */
+        ekran.webkitRequestFullscreen();
+    } else if (ekran.msRequestFullscreen) { /* Diğer tarayıcılar için */
+        ekran.msRequestFullscreen();
+    }
 }
