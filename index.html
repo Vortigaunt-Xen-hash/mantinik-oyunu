@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mancınık - Matematik Yarışması</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- YENİ EKLENEN OYUN SONU CSS KODLARI --- */
+        #end-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: none; 
+            justify-content: center; 
+            align-items: center;
+            z-index: 100;
+        }
+
+        #a4-paper {
+            width: 350px; /* Kutucuk özellikle büyütüldü */
+            height: 480px; /* Kutucuk büyütüldü */
+            background-color: #fdfdfd;
+            color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: all 1.5s ease-in-out; /* Rulo olma süresi */
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        #a4-paper h2 {
+            font-size: 36px; /* Yazı sabit boyutta tutuldu, scale kullanılmadı */
+            margin: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #loser-name {
+            color: #d32f2f; /* Kaybeden yazısı dikkat çeksin diye kırmızı */
+            font-size: 48px;
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Rulo Haline Gelmiş Kağıt (Katlanma Animasyonu) */
+        .a4-rolled {
+            width: 50px !important; /* Genişlik daralarak rulo şeklini alır */
+            border-radius: 10px / 240px; /* Silindir 3D görünümü için */
+            background: linear-gradient(to right, #d0d0d0 0%, #ffffff 50%, #b0b0b0 100%) !important;
+            box-shadow: 15px 15px 20px rgba(0,0,0,0.5) !important;
+        }
+
+        .a4-rolled h2 {
+            opacity: 0; /* Rulo olunca içindeki yazı gizlenir */
+        }
+    </style>
+</head>
+<body>
+
+<div id="video-container" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 200; background: black; justify-content: center; align-items: center;">
+    <video id="end-video" width="100%" height="100%" style="object-fit: cover;">
+        <source src="Senden_ricam_şu_anda_beyaz_kağ.mp4" type="video/mp4">
+        Tarayıcınız video oynatmayı desteklemiyor.
+    </video>
+</div>
+
+    <div id="hub-screen" class="screen">
+        <div id="hub-start-box" onclick="testGecis()"></div>
+    </div>
+
+    <div id="selection-screen" class="screen">
+        <div id="selection-panel">
+            <h2>YARIŞMACI İSİMLERİ</h2>
+            
+            <div class="input-group">
+                <label for="p1-name">1. Oyuncu (Sol):</label>
+                <input type="text" id="p1-name" placeholder="Bilge" value="Oyuncu 1">
+            </div>
+
+            <div class="input-group">
+                <label for="p2-name">2. Oyuncu (Sağ):</label>
+                <input type="text" id="p2-name" placeholder="İpek" value="Oyuncu 2">
+            </div>
+
+            <button id="goToGame-btn" onclick="oyunuBaslat()">YARIŞMAYI BAŞLAT</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen" style="display: none; position: relative;">
+        
+        <div id="names-container">
+            <div class="player-wrapper">
+                <div class="name-bg p1-bg"></div>
+                <div id="player1-display" class="name-text">Oyuncu 1</div>
+            </div>
+            <div class="player-wrapper">
+                <div class="name-bg p2-bg"></div>
+                <div id="player2-display" class="name-text">Oyuncu 2</div>
+            </div>
+        </div>
+
+        <div id="equation-container">
+            <h1 id="math-question">Soru Hazırlanıyor...</h1>
+        </div>
+
+        <div id="track-container">
+            <div id="rail-system"></div>
+            <div id="hammer"></div>
+        </div>
+
+        <div id="action-container">
+            <button class="correct-btn" onclick="dogruBildi('sol')">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>SOL Doğru Bildi!</span>
+            </button>
+            <button class="correct-btn" onclick="dogruBildi('sag')">
+                <span>SAĞ Doğru Bildi!</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Burada senin orjinal CSS kodlarında tanımlı olan #end-screen ve #a4-paper id'leri kullanılıyor -->
+        <div id="end-screen">
+            <div id="a4-paper">
+                <h2>KAYBEDEN<br><span id="loser-name">İsim</span></h2>
+            </div>
+        </div>
+
+    </div>	
+
+    <script src="script.js"></script>
+</body>
+</html>

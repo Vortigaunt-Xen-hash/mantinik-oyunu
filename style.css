@@ -1,0 +1,404 @@
+/* style.css (Düzeltilmiş ve Temizlenmiş Versiyon) */
+
+/* Genel Sıfırlama */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('selection_background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #87CEEB;
+}
+
+/* Ekranların Üst Üste Düzeni */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* =========================================
+   EKRAN 1: HUB (FLAMA) STİLLERİ
+========================================= */
+#hub-screen {
+    background-image: url('hub_flama.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    z-index: 2;
+    transition: transform 1.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+#hub-screen.kaldir {
+    transform: translateY(-100%);
+}
+
+#hub-start-box {
+    width: 400px;
+    height: 600px;
+    margin: 0 auto; 
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    /* background-image ve diğer background özellikleri tamamen SİLİNDİ */
+}
+
+/* =========================================
+   EKRAN 1.5: İSİM SEÇİM EKRANI
+========================================= */
+#selection-screen {
+    background-image: none;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#selection-panel {
+    background: linear-gradient(135deg, #a0522d, #8b4513);
+    border: 6px solid #5c2e16;
+    border-radius: 20px;
+    padding: 30px;
+    width: 400px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(0,0,0,0.4);
+    text-align: center;
+    color: white;
+}
+
+#selection-panel h2 {
+    margin-top: 0;
+    text-shadow: 2px 2px #000;
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px #000;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    font-family: inherit;
+    border-radius: 10px;
+    border: 3px solid #5c2e16;
+    box-sizing: border-box;
+}
+
+#goToGame-btn {
+    background-color: #ff9900;
+    color: white;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px 30px;
+    border: 3px solid white;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #cc7a00;
+    transition: transform 0.1s;
+}
+
+#goToGame-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #cc7a00;
+}
+
+/* =========================================
+   EKRAN 2: ANA OYUN EKRANI
+========================================= */
+#game-screen {
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* --- 1. İsimler Alanı (Daha Büyük Logo, Sabit Yazı) --- */
+#names-container {
+    position: absolute; 
+    top: 2vw;
+    left: 0;
+    width: 100vw;
+    height: 15vw;
+    z-index: 5;
+}
+
+.player-wrapper {
+    position: absolute;
+    top: 0;
+    width: 48vw;  /* LOGOLAR DAHA DA BÜYÜTÜLDÜ (Neredeyse ekranın yarısı) */
+    height: 16vw; /* Logoların oranı korundu */
+}
+
+/* 1. Oyuncu tam sola çivilendi */
+#names-container .player-wrapper:first-child {
+    left: 1vw;
+}
+
+/* 2. Oyuncu tam sağa çivilendi */
+#names-container .player-wrapper:last-child {
+    right: 1vw;
+}
+
+.name-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url('kırmızı_patili_isim_arkaplani.png');
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+}
+
+.p2-bg { 
+    transform: scaleX(-1); 
+}
+
+.name-text {
+    position: absolute;
+    z-index: 2;
+    color: white;
+    /* İSİM BÜYÜTÜLMEDİ! İçine tam oturması için sabit ve ideal bir boyuta kilitlendi */
+    font-size: 28px; 
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+    
+    /* Yazıyı tam kırmızı alanın içine oturtmak için */
+    top: 48%; 
+    left: 42%; 
+    transform: translate(-50%, -50%); 
+    
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: 250px; 
+    text-align: center;
+}
+
+/* Sağdaki oyuncunun hizalaması */
+.p2-bg + .name-text {
+    left: 58%; 
+}
+
+/* --- 2. Soru Panosu (Aşağı İndirildi) --- */
+#equation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    margin-top: 26vh; /* Kutu biraz daha aşağı itildi */
+}
+
+#math-question {
+    font-size: 60px;
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px 40px;
+    border-radius: 20px;
+    border: 4px solid #ff9900;
+    margin: 0;
+}
+
+/* --- 3. Çekiç ve Ray Sistemi --- */
+#track-container {
+    position: relative;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    margin: 0 100px;
+}
+
+#rail-system {
+    width: 100%;
+    height: 60px;
+    background-image: url('ray.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#hammer {
+    position: absolute;
+    bottom: 30px; /* Rayın üzerine oturması için revize edildi */
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 150px;
+    height: 200px;
+    background-image: url('cekic.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    transition: left 0.1s linear, transform 0.3s ease-in; /* Animasyonlar birleştirildi */
+    transform-origin: bottom center; 
+    z-index: 10;
+}
+
+/* ÇEKİÇ VURMA ANİMASYONLARI (Transition tabanlı olan tutuldu) */
+.vur-sol-animasyon {
+    transform: translateX(-50%) rotate(-75deg) !important;
+}
+
+.vur-sag-animasyon {
+    transform: translateX(-50%) rotate(75deg) !important;
+}
+
+/* --- 4. Doğru Bildi Butonları (Ahşap Tema ve SVG) --- */
+#action-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 100px;
+    z-index: 10;
+}
+
+.correct-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* İkon ile yazı arasındaki boşluk */
+    padding: 15px 35px;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(to bottom, #8b4513, #5c2e16); /* Gerçekçi ahşap renkleri */
+    color: white;
+    border: 4px solid #3e1f0f;
+    border-radius: 15px; /* Daha köşeli tabela görünümü */
+    box-shadow: 0 8px 0 #2a150a, 0 15px 20px rgba(0,0,0,0.5); /* 3 Boyutlu kalınlık */
+    transition: all 0.1s ease-in-out;
+    font-family: inherit;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.correct-btn:active {
+    transform: translateY(8px); /* Tıklanınca aşağı çökme hissi */
+    box-shadow: 0 0px 0 #2a150a, 0 5px 10px rgba(0,0,0,0.5);
+}
+
+.btn-icon {
+    width: 35px;
+    height: 35px;
+    stroke: #ffcc00; /* İkonları oyunun temasına uygun altın sarısı yaptık */
+    transition: transform 0.2s;
+}
+
+/* Üzerine gelince ikonlar hafifçe dışa doğru ok yönünde hareket eder */
+.correct-btn:hover .btn-icon {
+    transform: scale(1.2);
+}
+
+/* =========================================
+   OYUN BİTTİ RULO KAĞIT ANİMASYONU
+========================================= */
+#end-screen {
+    position: absolute;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: none; /* JavaScript kontrol edecek */
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* Eski animasyon HTML'de "a4-paper" olarak adlandırıldığı için class/id isimleri korundu */
+#a4-paper {
+    width: 350px; 
+    height: 480px; 
+    background-color: #fdfdfd;
+    background-image: repeating-linear-gradient(rgba(200, 180, 140, 0.1) 0px, rgba(200, 180, 140, 0.1) 2px, transparent 2px, transparent 40px);
+    color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: all 1.5s ease-in-out; 
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+#a4-paper h2 {
+    font-size: 36px; 
+    margin: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#loser-name {
+    color: #d32f2f; 
+    font-size: 48px;
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.a4-rolled {
+    width: 50px !important; 
+    border-radius: 10px / 240px; 
+    background: linear-gradient(to right, #d0d0d0 0%, #ffffff 50%, #b0b0b0 100%) !important;
+    box-shadow: 15px 15px 20px rgba(0,0,0,0.5) !important;
+}
+
+.a4-rolled h2 {
+    opacity: 0; 
+}
+
+/* Rulonun Mancınığa Düşme Animasyonu */
+.a4-drop-down {
+    transform: translateY(100vh) scale(0.5) !important; 
+    opacity: 0;
+    transition: all 0.8s ease-in !important;
+}
+
+/* --- MOBİL OYUN OPTİMİZASYONLARI --- */
+
+/* 1. Hızlı tıklamalarda ekranın büyümesini ve yazıların seçilmesini engelle */
+* {
+    user-select: none; 
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+/* 2. Sayfanın parmakla kaydırılmasını (scroll) tamamen kapat */
+body {
+    overflow: hidden !important; 
+}
+
+/* 3. Telefon dik (portrait) tutuluyorsa uyarı ekranı çıkart */
+@media screen and (orientation: portrait) {
+    body::before {
+        content: "Oynamak için telefonu YAN ÇEVİRİN! 📱🔄";
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: #111;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        z-index: 999999;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+}
